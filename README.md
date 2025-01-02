@@ -27,7 +27,7 @@ Visualization: Successive rows create dynamic, often fractal-like patterns.
 
 Rule 110 is particularly notable for being Turing-complete, meaning it can simulate any computation.
 
-## 2. Elementary Cellular Automata - Pracice
+## 2. Elementary Cellular Automata - Practice
 Elementary cellular automata are not just mathematical curiosities. 
 They find practical applications in various fields, including:
 
@@ -55,6 +55,22 @@ Key features in this version include a clean interface, interactive controls, an
 Dynamic Visualizations: Compare multiple cellular automata simultaneously by adding visualizers.
 Custom Rules: Change the rule of each automaton (0–255) dynamically.
 
+In next:
+### done:
++ added dark-light mode and click-changer
++ effects when hovering over buttons and pressing
++ random rule visualization function
++ added controls for each card:
+      - "A" to apply the new rule.
+      - "S" to save an image of the current state of the machine in PNG format.
+      - "C" to close a specific rendering card
++ dynamic change of rules
++ sth mini updates
+  the above mentioned will be in ver 1.5
+  
+
+### progress:
+- Django project
 
 
 By Stanislav Oryshchuk. started  - 31.12.2024.
