@@ -32,12 +32,22 @@ function createAutomaton(container, initialRule = 126) {
     input.value = ruleNumber;
     input.style.margin = '10px';
 
-    const button = document.createElement('button');
-    button.textContent = 'Apply Rule';
+    const applyButton = document.createElement('button');
+    applyButton.textContent = 'A'; // Apply Rule Button
 
+    // Save Button
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'S'; // Save Image Button
+
+    // Close Button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'C'; // Close Button
+    
     automatonDiv.appendChild(canvas);
     automatonDiv.appendChild(input);
-    automatonDiv.appendChild(button);
+    automatonDiv.appendChild(applyButton);
+    automatonDiv.appendChild(saveButton);
+    automatonDiv.appendChild(closeButton);
     container.appendChild(automatonDiv);
 
     const context = canvas.getContext('2d');
@@ -76,6 +86,19 @@ function createAutomaton(container, initialRule = 126) {
         }
     });
 
+    // Save image function
+    saveButton.addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = `automaton_rule_${ruleNumber}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+
+    // Close window function
+    closeButton.addEventListener('click', () => {
+        automatonDiv.remove(); // Remove the automaton window
+    });
+    
     draw_rule();
 }
 
@@ -100,9 +123,20 @@ function initial_row(width) {
     return initial_row;
 }
 
+// Function to generate a random rule number between 0 and 255
+function getRandomRule() {
+    return Math.floor(Math.random() * 256);
+}
+
 window.onload = function () {
     const container = document.getElementById('container');
     const addButton = document.getElementById('addWindow');
+    const randomButton = document.getElementById('randomRuleButton'); // For the "+R" button
+    const toggleButton = document.getElementById('themeToggle');
+
+    // Set initial theme
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.body.classList.add(currentTheme);
 
     // Create the first automaton
     createAutomaton(container);
@@ -111,4 +145,23 @@ window.onload = function () {
     addButton.addEventListener('click', () => {
         createAutomaton(container);
     });
+
+    // Add new automaton with random rule when the "+R" button is clicked
+    randomButton.addEventListener('click', () => {
+        const randomRule = getRandomRule();
+        createAutomaton(container, randomRule);
+    });
+
+    // Toggle theme on button click
+    toggleButton.addEventListener('click', () => {
+        const newTheme = document.body.classList.contains('light') ? 'dark' : 'light';
+        document.body.classList.remove('light', 'dark');
+        document.body.classList.add(newTheme);
+        localStorage.setItem('theme', newTheme); // Save the theme preference
+    });
 };
+
+
+
+
+
